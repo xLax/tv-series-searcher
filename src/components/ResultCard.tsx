@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import defaultImage from '../assets/default-image.png';
 import { Show } from '../types/show';
+import { RootState } from '../store/store';
+import { addFavorite, removeFavorite } from '../store/favoritesSlice';
 import './ResultCard.css';
 
 interface SearchResult {
@@ -14,8 +17,24 @@ interface Props {
 
 const ResultCard: React.FC<Props> = ({ item, onSelect }) => {
     const s = item.show;
+    const dispatch = useDispatch();
+    const favorites = useSelector((state: RootState) => state.favorites.favorites);
+    const isFavorite = favorites.some(fav => fav.id === s.id);
+
+    const toggleFavorite = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (isFavorite) {
+            dispatch(removeFavorite(s.id));
+        } else {
+            dispatch(addFavorite(s));
+        }
+    };
+
     return (
         <div className="result-card result-card-clickable" onClick={() => onSelect(s)}>
+            <button className="favorite-btn" onClick={toggleFavorite}>
+                {isFavorite ? '★' : '☆'}
+            </button>
             <div className="result-image-wrap">
                 <img src={s.image?.medium || s.image?.original || defaultImage} alt={s.name} className="result-image" />
                 <div className="result-overlay">

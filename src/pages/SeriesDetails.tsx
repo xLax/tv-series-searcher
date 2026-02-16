@@ -1,25 +1,18 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { useSelector, useDispatch } from 'react-redux';
 import { Show } from '../types/show';
 import { CastMember } from '../types/castMember';
 import CastItem from '../components/CastItem';
-
-
-const fetchShow = async (id: string): Promise<Show> => {
-  const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
-  if (!res.ok) throw new Error('Failed to fetch show');
-  return res.json();
-};
-
-const fetchCast = async (id: string): Promise<CastMember[]> => {
-  const res = await fetch(`https://api.tvmaze.com/shows/${id}/cast`);
-  if (!res.ok) throw new Error('Failed to fetch cast');
-  return res.json();
-};
+import { RootState } from '../store/store';
+import { addFavorite, removeFavorite } from '../store/favoritesSlice';
+import { fetchCast, fetchShow } from '../http';
 
 const SeriesDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch();
+  const favorites = useSelector((state: RootState) => state.favorites.favorites);
 
   const { data: show, isLoading: loadingShow } = useQuery<Show>({
     queryKey: ['show', id],
@@ -36,9 +29,24 @@ const SeriesDetails: React.FC = () => {
   if (loadingShow || loadingCast) return <div className="loading">Loading...</div>;
   if (!show) return <div className="error">Show not found.</div>;
 
+  const isFavorite = favorites.some(fav => fav.id === show.id);
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      dispatch(removeFavorite(show.id));
+    } else {
+      dispatch(addFavorite(show));
+    }
+  };
+
+  const backPath = sessionStorage.getItem('backPath') || '/';
+
   return (
     <div className="series-details-page">
-      <Link to="/" className="back-link">← Back to Search</Link>
+      <Link to={backPath} className="back-link">← Back</Link>
+      <button className="favorite-btn-details" onClick={toggleFavorite}>
+        {isFavorite ? '★' : '☆'}
+      </button>
       <div className="details-top-section">
         <div className="details-image-wrapper">
           <img

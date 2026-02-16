@@ -28,3 +28,31 @@
   text-align: right;
   color: #b2bec3;
 }
+
+.favorite-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: transparent;
+  border: none;
+  color: #ffd700;
+  font-size: 28px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  transition: transform 0.2s;
+}
+
+.result-card:hover .favorite-btn {
+  display: flex;
+}
+
+.favorite-btn:hover {
+  background: transparent;
+  transform: scale(1.2);
+}
