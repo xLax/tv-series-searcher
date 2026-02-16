@@ -1,70 +1,126 @@
-# Getting Started with Create React App
+# TV Shows Search App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React + TypeScript web application for searching TV shows using the TVMaze public API.
 
-## Available Scripts
+This project demonstrates clean state architecture, separation of server/client state, and production-style React patterns.
 
-In the project directory, you can run:
+🔗 Live Demo: https://tv-series-searcher.vercel.app/
+📂 Repository: https://github.com/xLax  
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React 18
+- TypeScript
+- Redux Toolkit
+- TanStack Query (React Query)
+- React Router
+- TVMaze Public API
+- Vite / Webpack
+- Deployed on Vercel
 
-### `npm test`
+## ✨ Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Search TV shows by name
+- Paginated results
+- Server-side caching with TanStack Query
+- Loading & error states handling
+- Fallback image handling
+- Favorites management (Redux)
+- URL-synced search state
+- Responsive UI
 
-### `npm run build`
+## 🧠 Architecture Overview
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Server State → TanStack Query
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+All API calls are managed with TanStack Query to provide:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Automatic caching
+- Background refetching
+- Optimized network usage
+- Built-in loading and error handling
 
-### `npm run eject`
+### Client State → Redux Toolkit
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Redux Toolkit is used for managing global client-side state that is shared across multiple components.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Currently used for:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Favorites / Watchlist management
+- UI-level shared state
+- Persistent state via localStorage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Why Redux instead of Context:
 
-## Learn More
+- Better scalability
+- Clear state structure (slices)
+- DevTools support for debugging
+- Cleaner separation of concerns
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Redux DevTools is fully supported during development.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🛠 Installation
 
-### Code Splitting
+Clone the repository and run the project locally:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+git clone https://github.com/YOUR_GITHUB_URL
+cd tv-shows-app
+npm install
+npm run dev
 
-### Analyzing the Bundle Size
+## 🌐 API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This project uses the free public **TVMaze API**:
 
-### Making a Progressive Web App
+https://api.tvmaze.com/search/shows?q=QUERY
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+Key notes:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- No API key required
+- Results are limited by API design (typically up to 10 best matches)
+- Server data is handled using **TanStack Query**
+- Pagination is managed at the UI level
 
-### Deployment
+## 🚀 Live Demo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The application is deployed on **Vercel**:
 
-### `npm run build` fails to minify
+https://tv-series-searcher.vercel.app/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## 🎯 What This Project Demonstrates
+
+- Clear separation between server and client state
+- Proper async data handling with TanStack Query
+- Global state management using Redux Toolkit
+- URL-driven state synchronization
+- Type-safe development with TypeScript
+- Scalable and maintainable React architecture
+- Performance-conscious API usage
+
+
+## 🧩 Architecture Highlights
+
+- **Server state** is managed using TanStack Query for caching, background refetching, and loading/error handling.
+- **Client state** (favorites and shared UI state) is managed using Redux Toolkit.
+- **Search term and page number** are synced with URL query parameters for refresh persistence and shareable links.
+- Fallback image handling ensures consistent UI when API data is incomplete.
+
+
+## 📌 Future Improvements
+
+- Infinite scroll support
+- Advanced filtering (genre, rating, status)
+- Unit & integration testing
+- Backend proxy layer
+- Improved UI polish and animations
+
+
+## 👤 Author
+
+Liron Levi
+
