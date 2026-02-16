@@ -1,0 +1,29 @@
+.error-custom {
+  margin-top: 10px;
+  text-align: center;
+  color: #e74c3c;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+  align-items: center;
+}
+
+.page-info {
+  color: #b2bec3;
+}
+
+.no-results {
+  text-align: center;
+  color: #b2bec3;
+  margin-top: 20px;
+}

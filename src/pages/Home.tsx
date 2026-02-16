@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useContext } from 'react';
 import SearchBar from '../components/SearchBar';
 import { PageContext } from '../store/page-context';
 import ResultsSection from '../components/ResultsSection';
+import './Home.css';
 
 const Home: React.FC = () => {
   const { setPage } = useContext(PageContext);
@@ -26,7 +27,7 @@ const Home: React.FC = () => {
   }, [setPage]);
 
   return (
-    <div className="home-page" style={{ maxWidth: 1000, margin: '0 auto', padding: '1rem' }}>
+    <div className="home-page home-container">
       <h1 className="main-title">Series Search Engine</h1>
       <SearchBar onSearch={handleSearch} initialValue={searchTerm} />
       <ResultsSection searchTerm={searchTerm} />

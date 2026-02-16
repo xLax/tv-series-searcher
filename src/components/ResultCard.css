@@ -1,0 +1,30 @@
+.result-card-clickable {
+  cursor: pointer;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #dfe6e9;
+}
+
+.result-title-custom {
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 70%;
+}
+
+.result-year {
+  text-align: right;
+  color: #b2bec3;
+}

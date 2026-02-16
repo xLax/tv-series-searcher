@@ -6,6 +6,7 @@ import ResultCard from "./ResultCard";
 import { fetchSeries } from "../http";
 import { SearchResult } from "../types/searchResults";
 import { PageContext } from "../store/page-context";
+import './ResultsSection.css';
 
 const PAGE_SIZE = 10;
 
@@ -51,7 +52,7 @@ const ResultsSection: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
 
     return <>
         {isError && (
-            <div className="error" style={{ marginTop: 10, textAlign: 'center', color: '#e74c3c' }}>
+            <div className="error error-custom">
                 {error instanceof Error ? error.message : 'An error occurred while fetching data.'}
             </div>
         )}
@@ -59,22 +60,22 @@ const ResultsSection: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
 
         {!isFetching && results && results.length > 0 && (
             <div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 24 }}>
+                <div className="results-grid">
                     {paginated.map((item) => (
                         <ResultCard key={item.show.id} item={item} onSelect={handleSelect} />
                     ))}
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 18, alignItems: 'center' }}>
+                <div className="pagination-container">
                     <button className="pagination-button" disabled={page <= 1} onClick={prevPage}>Prev</button>
-                    <div style={{ color: '#b2bec3' }}>Page {page} of {totalPages}</div>
+                    <div className="page-info">Page {page} of {totalPages}</div>
                     <button className="pagination-button" disabled={page >= totalPages} onClick={() => nextPage(totalPages)}>Next</button>
                 </div>
             </div>
         )}
 
         {!isFetching && results && results.length === 0 && (
-            <div style={{ textAlign: 'center', color: '#b2bec3', marginTop: 20 }}>No results</div>
+            <div className="no-results">No results</div>
         )}
     </>
 }
